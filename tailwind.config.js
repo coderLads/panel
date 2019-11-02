@@ -193,7 +193,6 @@ module.exports = {
       none: 'none',
     },
     container: {
-      center: true,
     },
     cursor: {
       auto: 'auto',

@@ -1,10 +1,39 @@
 <template>
-  <div class="sign-up">
-    <p>Signup</p>
-    <input type="text" v-model="email" placeholder="Email">
-    <input type="password" v-model="password" placeholder="Password">
-    <button @click="signUp">Sign Up</button>
-    <p>or <router-link to="/login">login</router-link>.</p>
+<div class="container mx-auto max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8">
+    <h3 class="block text-gray-700 text-lg font-bold mb-4"> Sign Up </h3>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="email"
+        type="text"
+        placeholder="Email"
+        v-model="email"
+      />
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        id="password"
+        type="password"
+        placeholder="******************"
+        v-model="password"
+      />
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button"
+        @click="signUp">
+      Sign Up
+      </button>
+      <router-link
+        to="/login"
+        class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800"
+        href="#"
+      >Login?</router-link>
+    </div>
   </div>
 </template>
 
@@ -38,6 +67,3 @@ export default Vue.extend({
   },
 });
 </script>
-<style scoped>
-
-</style>
