@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div> You're signed in now eeeh </div>
+    <button @click="logout">Logout</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default Vue.extend({
   name: 'home',
   components: {
-    HelloWorld,
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('login');
+      });
+    },
   },
 });
 </script>
