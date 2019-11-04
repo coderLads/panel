@@ -1,5 +1,5 @@
 <template>
-  <div class="home h-full flex flex-col">
+  <div class="home flex flex-col">
     <grid />
   </div>
 </template>
