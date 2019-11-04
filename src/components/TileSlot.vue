@@ -1,6 +1,6 @@
 <template>
-  <div class="w-64 h-32 bg-teal-600 text-center m-4 rounded shadow-md">
-    Content
+  <div class="w-48 h-48 bg-gray-200 text-center m-4 rounded shadow-inner">
+
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Tile',
+  name: 'TileSlot',
   props: {
   },
   data() {

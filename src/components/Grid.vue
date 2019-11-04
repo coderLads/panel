@@ -1,26 +1,25 @@
 <template>
-  <div class="bg-teal-300 flex flex-wrap justify-center">
-    <tile
-    v-for="n in count"
-    :key="n"
-    />
+  <div>
+    <div class="flex justify-center" v-for="r in rows" :key="r">
+      <tileSlot v-for="c in cols" :key="c" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import tile from '@/components/Tile.vue';
+import tileSlot from '@/components/TileSlot.vue';
 
 export default Vue.extend({
   name: 'Grid',
-  props: {
-  },
+  props: {},
   components: {
-    tile,
+    tileSlot,
   },
   data() {
     return {
-      count: 12,
+      cols: 4,
+      rows: 3,
     };
   },
 });
