@@ -29,6 +29,11 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Signup.vue'),
     },
     {
+      path: '/reset',
+      name: 'Reset',
+      component: () => import(/* webpackChunkName: "about" */ './views/Reset.vue'),
+    },
+    {
       path: '/home',
       name: 'Home',
       component: Home,
