@@ -29,16 +29,15 @@
       Login
       </button>
       <router-link
+        to="/reset"
+        class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800"
+        href="#"
+      >Forgot Password?</router-link>
+      <router-link
         to="/signup"
         class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800"
         href="#"
       >Sign up?</router-link>
-      <button
-        class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        type="button"
-        @click="resetPassword">
-      Reset Password
-      </button>
     </div>
   </div>
 </template>
@@ -72,13 +71,6 @@ export default Vue.extend({
           },
         );
     },
-    resetPassword() {
-      firebase.auth().sendPasswordResetEmail(this.email).then(function() {
-        alert('Sent password reset request to email');
-      }).catch(function(err) {
-        alert(`Oops. ${err.message}`);
-      });
-    }
   },
 });
 </script>
