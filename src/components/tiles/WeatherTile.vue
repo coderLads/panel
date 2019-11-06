@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import keys from '@/keys';
 
 export default Vue.extend({
   name: 'WeatherTile',
@@ -31,7 +32,7 @@ export default Vue.extend({
   beforeMount() {
     const self = this;
     const request = new XMLHttpRequest();
-    request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=ccc82db3a17a22d2039288a38a156b12&units=imperial`, true);
+    request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=imperial`, true);
     request.onload = () => {
       if (request.status >= 200 && request.status < 400) {
         const r = JSON.parse(request.response);

@@ -20,3 +20,4 @@ yarn-error.log*
 *.sln
 *.sw?
 src/firebaseConfig.ts
+src/keys.ts
