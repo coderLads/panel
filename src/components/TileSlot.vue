@@ -1,5 +1,5 @@
 <template>
-  <div class="w-48 h-48 bg-gray-200 text-center m-4 rounded shadow-inner">
+  <div class="w-48 h-32 bg-gray-200 text-center m-4 rounded shadow-inner">
     <component v-bind:is="componentFile"></component>
   </div>
 </template>
