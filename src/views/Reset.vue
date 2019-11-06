@@ -39,6 +39,7 @@ export default Vue.extend({
       firebase.auth().sendPasswordResetEmail(this.email).then(() => {
         // eslint-disable-next-line no-alert
         alert('Sent password reset request to email');
+        this.$router.replace('login');
       }).catch((err) => {
         // eslint-disable-next-line no-alert
         alert(`Oops. ${err.message}`);

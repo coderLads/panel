@@ -29,6 +29,11 @@
       Login
       </button>
       <router-link
+        to="/reset"
+        class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800"
+        href="#"
+      >Forgot Password?</router-link>
+      <router-link
         to="/signup"
         class="inline-block align-baseline font-bold text-sm text-teal-500 hover:text-teal-800"
         href="#"
