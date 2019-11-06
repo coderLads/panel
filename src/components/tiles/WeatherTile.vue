@@ -27,21 +27,33 @@ export default Vue.extend({
       weather: 0,
       location: 'Seattle',
       iconurl: '',
+      intervalHolder: 0,
+      delayBetweenUpdates: 30000,
     };
   },
-  beforeMount() {
-    const self = this;
-    const request = new XMLHttpRequest();
-    request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=imperial`, true);
-    request.onload = () => {
-      if (request.status >= 200 && request.status < 400) {
-        const r = JSON.parse(request.response);
-        self.iconurl = `http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`;
-        self.weather = Math.round(r.main.temp);
-        self.link = `https://openweathermap.org/find?q=${self.location}`;
-      }
-    };
-    request.send();
+  methods: {
+    updateTile() {
+      const self = this;
+      const request = new XMLHttpRequest();
+      request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=imperial`, true);
+      request.onload = () => {
+        if (request.status >= 200 && request.status < 400) {
+          const r = JSON.parse(request.response);
+          self.iconurl = `http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`;
+          self.weather = Math.round(r.main.temp);
+          self.link = `https://openweathermap.org/find?q=${self.location}`;
+        }
+      };
+      request.send();
+    },
+  },
+  created() {
+    this.intervalHolder = setInterval(() => {
+      this.updateTile();
+    }, this.delayBetweenUpdates);
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalHolder);
   },
 });
 </script>
