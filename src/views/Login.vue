@@ -74,9 +74,9 @@ export default Vue.extend({
     },
     resetPassword() {
       firebase.auth().sendPasswordResetEmail(this.email).then(function() {
-        alert('Sent email');
-      }).catch(function(error) {
-        alert('Something went wrong!');
+        alert('Sent password reset request to email');
+      }).catch(function(err) {
+        alert(`Oops. ${err.message}`);
       });
     }
   },
