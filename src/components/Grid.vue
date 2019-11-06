@@ -20,7 +20,7 @@ export default Vue.extend({
     return {
       tileData: [ // this defines what is on the grid
         [null, 'ExampleTile', null, null],
-        [null, null, null, null],
+        [null, 'WeatherTile', null, null],
         [null, null, null, null],
       ],
     };
