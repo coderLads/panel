@@ -36,12 +36,14 @@ export default Vue.extend({
   },
   methods: {
     resetPassword() {
-      firebase.auth().sendPasswordResetEmail(this.email).then(function() {
+      firebase.auth().sendPasswordResetEmail(this.email).then(() => {
+        // eslint-disable-next-line no-alert
         alert('Sent password reset request to email');
-      }).catch(function(err) {
+      }).catch((err) => {
+        // eslint-disable-next-line no-alert
         alert(`Oops. ${err.message}`);
       });
-    }
+    },
   },
 });
 </script>
