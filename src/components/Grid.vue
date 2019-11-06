@@ -1,25 +1,28 @@
 <template>
   <div>
-    <div class="flex justify-center" v-for="r in rows" :key="r">
-      <tileSlot v-for="c in cols" :key="c" />
+    <div class="flex justify-center" v-for="(r, rkey) in tileData" :key="rkey">
+      <TileSlot v-for="(i, ikey) in r" :key="ikey" :tile="i"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import tileSlot from '@/components/TileSlot.vue';
+import TileSlot from '@/components/TileSlot.vue';
 
 export default Vue.extend({
   name: 'Grid',
   props: {},
   components: {
-    tileSlot,
+    TileSlot,
   },
   data() {
     return {
-      cols: 4,
-      rows: 3,
+      tileData: [ // this defines what is on the grid
+        [null, 'ExampleTile', null, null],
+        [null, null, null, null],
+        [null, null, null, null],
+      ],
     };
   },
 });
