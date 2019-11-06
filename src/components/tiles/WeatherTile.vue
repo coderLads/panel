@@ -25,7 +25,7 @@ export default Vue.extend({
     return {
       link: '',
       weather: 0,
-      location: 'Seattle',
+      location: 'Tokyo',
       iconurl: '',
       intervalHolder: 0,
       delayBetweenUpdates: 30000,
@@ -48,6 +48,7 @@ export default Vue.extend({
     },
   },
   created() {
+    this.updateTile();
     this.intervalHolder = setInterval(() => {
       this.updateTile();
     }, this.delayBetweenUpdates);

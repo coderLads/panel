@@ -30,6 +30,7 @@ export default Vue.extend({
     },
   },
   created() {
+    this.updateTile();
     this.intervalHolder = setInterval(() => {
       this.updateTile();
     }, this.delayBetweenUpdates);

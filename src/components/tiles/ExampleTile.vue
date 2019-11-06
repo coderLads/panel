@@ -28,6 +28,7 @@ export default Vue.extend({
     },
   },
   created() {
+    this.updateTile();
     // creates the interval
     this.intervalHolder = setInterval(() => {
       this.updateTile();
