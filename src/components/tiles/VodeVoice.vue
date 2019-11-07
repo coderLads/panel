@@ -3,6 +3,7 @@
     :href='link'
     target="_blank"
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
+    :class="{ shiny: highlight }"
   >
   <!--<img :src="iconurl" class='block text-center w-12 h-12' style='margin: 0 auto; margin-bottom: -.75rem'>-->
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
@@ -25,6 +26,7 @@ export default Vue.extend({
       hours: 0,
       serverId: '617054974895063050',
       user: 'Badtz#6434',
+      highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
     };
@@ -37,11 +39,20 @@ export default Vue.extend({
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          self.hours = r.topMembers.find((i:any) => i.membertag === self.user).count;
+          const newUserHours = r.topMembers.find((i:any) => i.membertag === self.user).count;
+          if (self.hours !== newUserHours) {
+            self.addShine();
+            self.hours = newUserHours;
+          }
+
           self.link = `https://statbot.net/dashboard/${self.serverId}/voice`;
         }
       };
       request.send();
+    },
+    addShine() {
+      this.highlight = true;
+      setTimeout(() => { this.highlight = false; }, 5000);
     },
   },
   created() {

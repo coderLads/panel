@@ -1,4 +1,5 @@
 
+import '@/assets/css/shine.css';
 import '@/assets/css/tailwind.css';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';

@@ -3,6 +3,7 @@
     :href='link'
     target="_blank"
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
+    :class="{ shiny: highlight }"
   >
   <!--<img :src="iconurl" class='block text-center w-12 h-12' style='margin: 0 auto; margin-bottom: -.75rem'>-->
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
@@ -27,6 +28,7 @@ export default Vue.extend({
       weather: 0,
       location: 'Tokyo',
       iconurl: '',
+      highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 30000,
     };
@@ -40,11 +42,19 @@ export default Vue.extend({
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
           self.iconurl = `http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`;
-          self.weather = Math.round(r.main.temp);
+          const currentWeather = Math.round(r.main.temp);
+          if (self.weather !== currentWeather) {
+            self.addShine();
+            self.weather = currentWeather;
+          }
           self.link = `https://openweathermap.org/find?q=${self.location}`;
         }
       };
       request.send();
+    },
+    addShine() {
+      this.highlight = true;
+      setTimeout(() => { this.highlight = false; }, 5000);
     },
   },
   created() {
