@@ -37,11 +37,11 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=imperial`, true);
+      request.open('GET', `https://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=imperial`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          self.iconurl = `http://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`;
+          self.iconurl = `https://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`;
           const currentWeather = Math.round(r.main.temp);
           if (self.weather !== currentWeather) {
             self.addShine();
