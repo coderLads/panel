@@ -25,7 +25,16 @@ export default Vue.extend({
   methods: {
     updateTile() {
       const formattedTime = new Date(new Date().toLocaleString('en-US', { timeZone: this.timeZone }));
-      this.time = `${formattedTime.getHours() < 12 ? formattedTime.getHours() : formattedTime.getHours() - 12}:${formattedTime.getMinutes() < 10 ? '0' : ''}${formattedTime.getMinutes()}`;
+      function getHours() {
+        if (formattedTime.getHours() <= 12) {
+          if (formattedTime.getHours() === 0) {
+            return 12;
+          }
+          return formattedTime.getHours();
+        }
+        return formattedTime.getHours() - 12;
+      }
+      this.time = `${getHours()}:${formattedTime.getMinutes() < 10 ? '0' : ''}${formattedTime.getMinutes()}`;
       this.range = formattedTime.getHours() < 12 ? 'AM' : 'PM';
     },
   },
