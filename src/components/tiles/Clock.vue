@@ -1,5 +1,5 @@
 <template>
-  <a href="" target="_blank" class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col">
+  <a class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col">
     <p class="text-4xl text-teal-500 mt-4">{{time}}</p>
     <span class="text-base text-gray-500 mt-1">{{range}}</span>
     <div class="text-sm text-gray-700 mt-1">{{timeZone.split('/')[1].replace("_"," ")}}</div>
