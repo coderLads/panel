@@ -8,7 +8,7 @@
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
       <p class="text-4xl ml-2">{{hours}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Hours</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">Minutes</span>
     <div class="text-sm text-gray-700 mt-1">Vode Voice Stats</div>
   </a>
 </template>
