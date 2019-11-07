@@ -4,24 +4,23 @@
 }
 
 .shiny:after {
-    animation: shine 2s ease-in-out 0s 1 normal forwards;
-    /* animation: shine 5s ease-in-out normal; */
+    animation: shine 3s ease-in-out 0s 1 forwards;
     animation-fill-mode: forwards;  
     content: "";
     position: absolute;
-    top: -120%;
+    top: -130%;
     left: -210%;
     width: 200%;
     height: 200%;
     opacity: 0;
     transform: rotate(30deg);
     
-    background: rgba(255, 255, 255, 0.13);
+    background: rgba(56, 178, 172, 0);
     background: linear-gradient(
       to right, 
-      rgba(56, 178, 172, 0.2) 0%,
-      rgba(56, 178, 172, 0.2) 77%,
-      rgba(56, 178, 172, 0.4) 92%,
+      rgba(56, 178, 172, 0) 0%,
+      rgba(56, 178, 172, 0.05) 70%,
+      rgba(56, 178, 172, 0.3) 90%,
       rgba(56, 178, 172, 0.0) 100%
     );
 }
@@ -37,7 +36,7 @@
     }
     100% {
       opacity: 0;
-      top: -30%;
+      top: -50%;
       left: -30%;
       transition-property: left, top, opacity;
     }

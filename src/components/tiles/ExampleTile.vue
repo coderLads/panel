@@ -1,5 +1,5 @@
 <template>
-  <a href="" target="_blank" class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col" :class="{ shiny: highlight }">
+  <a class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col" :class="{ shiny: highlight }">
     <!-- the main number to be displayed  -->
     <p class="text-4xl text-teal-500 mt-4">10</p>
     <!-- small note adding context to the number -->
