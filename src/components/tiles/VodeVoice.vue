@@ -7,7 +7,7 @@
   >
   <!--<img :src="iconurl" class='block text-center w-12 h-12' style='margin: 0 auto; margin-bottom: -.75rem'>-->
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
-      <p class="text-4xl ml-2">{{hours}}</p>
+      <p class="text-4xl">{{hours}}</p>
     </div>
     <span class="text-base text-gray-500 mt-1 align-middle">Minutes</span>
     <div class="text-sm text-gray-700 mt-1">Vode Voice Stats</div>
