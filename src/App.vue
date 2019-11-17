@@ -1,30 +1,13 @@
 <template>
-  <div id="app" class="bg-gray-100">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-    </div>-->
-    <nav class="flex items-center justify-between bg-teal-500 p-4">
-      <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-xl tracking-tight">Panel</span>
-      </div>
-      <div class="w-full block flex-grow flex items-center w-auto">
-        <div class="text-sm flex-grow">
-          <router-link
-            to="/"
-            class="inline-block mt-0 text-teal-200 hover:text-white mr-4"
-          >Home</router-link>
-        </div>
-        <div class="flex">
-          <div class="block text-sm px-4 py-2 text-teal-200">{{ user.email}}</div>
-          <button
-            v-if="Object.keys(user).length != 0"
-            class="block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
-            @click="logout"
-          >Logout</button>
-        </div>
-      </div>
-    </nav>
+  <div id="app" class="">
+    <div v-if="Object.keys(user).length != 0"
+      class="bg-transparent p-4 absolute w-auto right-0"
+    >
+      <button
+        class="block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
+        @click="logout"
+      >Logout</button>
+    </div>
     <router-view />
   </div>
 </template>
