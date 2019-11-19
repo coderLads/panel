@@ -1,12 +1,19 @@
-name: CI
-
-on: [push]
-
+name: Build and Deploy
+on:
+  push:
+    branches:
+    - master
 jobs:
-  deploy:
+  main:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: jakejarvis/firebase-deploy-action@master
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: yarn build
+      run: yarn build
+    - name: Deploy to Firebase
+      uses: lowply/deploy-firebase@v0.0.2
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_PROJECT: panel-6b9aa
