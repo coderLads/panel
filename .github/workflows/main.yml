@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@master
+    - name: Yarn Install
+      run: yarn
     - name: yarn build
       run: yarn build
     - name: Deploy to Firebase
