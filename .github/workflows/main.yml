@@ -1,14 +1,16 @@
 name: Lint
-
-on: [push]
-
+on:
+  push:
+    branches:
+    - master
 jobs:
-  build:
+  main:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      run: actions/checkout@master
-    - name: Install
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Yarn Install
       run: yarn
     - name: Lint
       run: yarn lint
