@@ -1,4 +1,4 @@
-name: CI
+name: Lint
 
 on: [push]
 
@@ -6,5 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      run: actions/checkout@master
+    - name: Install
+      run: yarn
     - name: Lint
       run: yarn lint
