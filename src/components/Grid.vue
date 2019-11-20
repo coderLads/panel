@@ -21,7 +21,7 @@ export default Vue.extend({
     return {
       tileData: [ // this defines what is on the grid
         ['PiHole', 'WeatherTile', 'Clock', 'VodeVoice'],
-        [null, null, null, null],
+        ['Anilist', null, null, null],
         [null, null, null, null],
       ],
     };
