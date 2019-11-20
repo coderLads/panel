@@ -1,6 +1,5 @@
 <template>
   <a
-    :href='link'
     target="_blank"
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
     :class="{ shiny: highlight }"
