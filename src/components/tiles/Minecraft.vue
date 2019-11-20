@@ -5,8 +5,8 @@
     :class="{ shiny: highlight }"
   >
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
-      <p class="text-4xl ml-2">{{players}}</p>
-      <p class="text-4xl ml-2">/{{maxPlayers}}</p>
+      <p class="text-4xl ">{{players}}</p>
+      <p class="text-4xl ">/{{maxPlayers}}</p>
     </div>
     <span class="text-base text-gray-500 mt-1 align-middle">Online Players</span>
     <div class="text-xs text-gray-700 mt-1">{{serverIp}}</div>
