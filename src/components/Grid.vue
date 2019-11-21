@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <div class="flex justify-center" v-for="(r, rkey) in tileData" :key="rkey">
+    <div class="flex" :class="justify" v-for="(r, rkey) in tileData" :key="rkey">
       <TileSlot v-for="(i, ikey) in r" :key="ikey" :tile="i"/>
     </div>
   </div>
@@ -19,10 +19,11 @@ export default Vue.extend({
   },
   data() {
     return {
+      justify: 'justify-start',
       tileData: [ // this defines what is on the grid
-        ['PiHole', 'WeatherTile', 'Clock', 'VodeVoice'],
-        ['Anilist', 'Minecraft', 'MoonPhase', null],
-        [null, null, null, null],
+        ['PiHole', 'WeatherTile', 'Clock', 'VodeVoice', null],
+        ['Anilist', 'Minecraft', 'MoonPhase', null, null],
+        [null, null, null, null, null],
       ],
     };
   },

@@ -5,7 +5,7 @@
   >
     <p class="text-4xl text-teal-500 mt-4">{{phase}}</p>
     <span class="text-base text-gray-500 mt-1">{{type}}</span>
-    <div class="text-sm text-gray-700 mt-1">{{daysUntil}}</div>
+    <div class="text-xs text-gray-700 mt-1">{{daysUntil}}</div>
   </a>
 </template>
 
