@@ -39,11 +39,11 @@ export default Vue.extend({
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          self.maxPlayers = r.players.max;
           const currentPlayers = r.players.online;
-          if (self.players !== currentPlayers) {
+          if (self.players !== currentPlayers || self.maxPlayers !== r.players.max) {
             self.addShine();
             self.players = currentPlayers;
+            self.maxPlayers = r.players.max;
           }
         }
       };
