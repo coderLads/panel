@@ -10,7 +10,6 @@
 import Vue from 'vue';
 import TileSlot from '@/components/TileSlot.vue';
 
-
 export default Vue.extend({
   name: 'Grid',
   props: {},
@@ -19,11 +18,11 @@ export default Vue.extend({
   },
   data() {
     return {
-      justify: 'justify-start',
+      justify: 'justify-center',
       tileData: [ // this defines what is on the grid
-        ['PiHole', 'WeatherTile', 'Clock', 'VodeVoice', null],
-        ['Anilist', 'Minecraft', 'MoonPhase', null, null],
-        [null, null, null, null, null],
+        ['PiHole', 'WeatherTile', 'Clock', 'VodeVoice'],
+        ['Anilist', 'Minecraft', 'MoonPhase', null],
+        [null, null, null, null],
       ],
     };
   },

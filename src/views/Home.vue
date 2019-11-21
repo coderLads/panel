@@ -18,7 +18,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      url: `https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}?earth,nature`,
+      url: `https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}?landscape,nature`,
     };
   },
 });

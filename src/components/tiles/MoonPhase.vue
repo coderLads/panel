@@ -38,25 +38,22 @@ export default Vue.extend({
         ['🌘', 'Waning Crescent'],
         ['🌑', 'New Moon'],
       ];
-      const synodicMonthConstant: number = 29.530588853;
-      const oneDay: number = 86400000; // in milliseconds
-      const todaysDate: Date = new Date();
-      const lastKnownNewMoon: Date = new Date(2019, 9, 27); // October 27th 2019
+      // Take the difference between the last new moon and today and divide it by one day in milliseconds,
+      // take the absolute value of that value and round it, and then mod it by the Synodic constant
+      const moonAge: number = Math.round(Math.abs(((new Date() as any) - (new Date(2019, 9, 27) as any)) / 86400000)) % 29.530588853;
 
-      const moonAge: number = Math.round(Math.abs(((todaysDate as any) - (lastKnownNewMoon as any)) / oneDay)) % synodicMonthConstant;
+      let intermediatePhase: number = Math.floor(moonAge / (7.38 / 2));
+      if (intermediatePhase >= 8) { intermediatePhase -= 8; }
 
-      let i: number = Math.floor(moonAge / (7.38 / 2));
-      i = i > 7 ? i - 7 : i;
-
-      if (this.phase !== moonPhase[i][0]) {
+      if (this.phase !== moonPhase[intermediatePhase][0]) {
         this.addShine();
         // eslint-disable-next-line prefer-destructuring
-        this.phase = moonPhase[i][0];
-        this.daysUntil = `${Math.abs(Math.ceil(7.38 / 2 - i))} days until ${
-          moonPhase[i + 1][1]
+        this.phase = moonPhase[intermediatePhase][0];
+        this.daysUntil = `${Math.abs(Math.ceil(7.38 / 2 - intermediatePhase))} days until ${
+          moonPhase[intermediatePhase + 1][1]
         }`;
         // eslint-disable-next-line prefer-destructuring
-        this.type = moonPhase[i][1];
+        this.type = moonPhase[intermediatePhase][1];
       }
     },
     addShine() {
