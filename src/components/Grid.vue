@@ -1,7 +1,7 @@
 <template>
   <div class="h-full">
-    <div class="flex" :class="justify" v-for="(r, rkey) in tileData" :key="rkey">
-      <TileSlot v-for="(i, ikey) in r" :key="ikey" :tile="i"/>
+    <div class="flex" :class="justify" v-for="rkey in rows" :key="rkey">
+      <TileSlot v-for="ckey in columns" :key="ckey" :tile="tileObject[((rkey-1)*columns) + ckey-1]"/>
     </div>
   </div>
 </template>
@@ -22,11 +22,6 @@ export default Vue.extend({
   data() {
     return {
       justify: 'justify-center',
-      tileData: [ // this defines what is on the grid
-        ['PiHole', 'WeatherTile', 'Clock', 'VodeVoice'],
-        ['Anilist', 'Minecraft', 'MoonPhase', null],
-        [null, null, null, null],
-      ],
       tileObject: [] as any,
       rows: 0,
       columns: 0,
@@ -43,14 +38,19 @@ export default Vue.extend({
         this.columns = result.columns;
 
         // fetch the user's tiles
-        firebase.database().ref(`/users/${currentUser.uid}/tiles`).orderByChild('index').once('value', (tileSnapshot) => {
+        firebase.database().ref(`/users/${currentUser.uid}/tiles/`).orderByChild('index').once('value', (tileSnapshot) => {
           const tiles = tileSnapshot.val();
-          // console.log(tiles);
+          const tileArray = Object.keys(tiles).map(key => [(key), tiles[key]]);
+          tileArray.sort((a, b) => a[1].index - b[1].index);
+
           // construct the tile object used by vue
           let j = 0;
           for (let i = 0; i < (this.rows * this.columns); i += 1) {
-            if (tiles[j].index === i) {
-              this.tileObject.push(tiles[j]);
+            if (tileArray[j][1].index === i) {
+              this.tileObject.push(tileArray[j]);
+              if (j + 2 > tileArray.length) {
+                break;
+              }
               j += 1;
             } else {
               this.tileObject.push(null);
