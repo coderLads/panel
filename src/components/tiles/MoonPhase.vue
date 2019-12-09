@@ -45,8 +45,6 @@ export default Vue.extend({
       let roundPhase: number = Math.floor(intermediatePhase);
       if (roundPhase >= 8) { roundPhase = 0; }
 
-      console.log(moonAge);
-
       if (this.phase !== moonPhase[roundPhase][0]) {
         this.addShine();
         // eslint-disable-next-line prefer-destructuring
