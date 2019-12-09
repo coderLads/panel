@@ -41,6 +41,7 @@
 import Vue from 'vue';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 export default Vue.extend({
   name: 'signup',
@@ -54,15 +55,18 @@ export default Vue.extend({
   },
   methods: {
     signUp() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-        (user) => {
-          this.$router.replace('home');
-        },
-        (err) => {
-          // eslint-disable-next-line no-alert
-          alert(`Oops. ${err.message}`);
-        },
-      );
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) => {
+        if (user.user) {
+          firebase.database().ref(`users/${user.user.uid}`).set({
+            email: this.email,
+          });
+        }
+        this.$router.replace('home');
+      },
+      (err) => {
+        // eslint-disable-next-line no-alert
+        alert(`Oops. ${err.message}`);
+      });
     },
   },
 });

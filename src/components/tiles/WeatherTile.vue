@@ -5,9 +5,9 @@
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
     :class="{ shiny: highlight }"
   >
-  <!--<img :src="iconurl" class='block text-center w-12 h-12' style='margin: 0 auto; margin-bottom: -.75rem'>-->
+  <!-- <img :src="iconurl" class='block text-center w-12 h-12' style='margin: 0 auto; margin-bottom: -.75rem'> -->
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
-      <p class="text-4xl ml-2">{{weather}}</p>
+      <p class="text-4xl ml-2">{{tempterature}}</p>
       <span class="text-xl pb-2">º</span>
     </div>
     <span class="text-base text-gray-500 mt-1 align-middle">{{location}}</span>
@@ -25,7 +25,8 @@ export default Vue.extend({
   data() {
     return {
       link: '',
-      weather: 0,
+      tempterature: 0,
+      units: 'imperial',
       location: 'Seattle',
       iconurl: '',
       highlight: false,
@@ -37,15 +38,15 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', `https://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=imperial`, true);
+      request.open('GET', `https://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=${self.units}`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
           self.iconurl = `https://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`;
           const currentWeather = Math.round(r.main.temp);
-          if (self.weather !== currentWeather) {
+          if (self.tempterature !== currentWeather) {
             self.addShine();
-            self.weather = currentWeather;
+            self.tempterature = currentWeather;
           }
           self.link = `https://openweathermap.org/find?q=${self.location}`;
         }
