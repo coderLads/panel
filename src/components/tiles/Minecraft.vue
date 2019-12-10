@@ -9,7 +9,7 @@
       <p class="text-4xl ">/{{maxPlayers}}</p>
     </div>
     <span class="text-base text-gray-500 mt-1 align-middle">Online Players</span>
-    <div class="text-xs text-gray-700 mt-1">{{serverIp}}</div>
+    <div class="text-xs text-gray-700 mt-1">{{tileProps.serverIp}}</div>
   </a>
 </template>
 
@@ -19,13 +19,14 @@ import keys from '@/keys';
 
 export default Vue.extend({
   name: 'Minecraft',
-  props: {},
+  props: {
+    tileProps: Object,
+  },
   data() {
     return {
       link: '',
       players: 0,
       maxPlayers: 0,
-      serverIp: 'vyst.westus.cloudapp.azure.com',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
@@ -35,7 +36,7 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', `https://api.mcsrvstat.us/2/${self.serverIp}`, true);
+      request.open('GET', `https://api.mcsrvstat.us/2/${self.tileProps.serverIp}`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);

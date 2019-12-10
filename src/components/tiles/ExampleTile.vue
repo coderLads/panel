@@ -15,6 +15,7 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'ExampleTile',
   props: {
+    tileProps: Object, // this stores tile properties from the database
   },
   data() {
     return {

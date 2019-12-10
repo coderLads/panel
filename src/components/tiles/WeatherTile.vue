@@ -10,7 +10,7 @@
       <p class="text-4xl ml-2">{{tempterature}}</p>
       <span class="text-xl pb-2">º</span>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">{{location}}</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">{{tileProps.location}}</span>
     <div class="text-sm text-gray-700 mt-1">Open Weather Map</div>
   </a>
 </template>
@@ -21,13 +21,13 @@ import keys from '@/keys';
 
 export default Vue.extend({
   name: 'WeatherTile',
-  props: {},
+  props: {
+    tileProps: Object,
+  },
   data() {
     return {
       link: '',
       tempterature: 0,
-      units: 'imperial',
-      location: 'Seattle',
       iconurl: '',
       highlight: false,
       intervalHolder: 0,
@@ -38,7 +38,7 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', `https://api.openweathermap.org/data/2.5/weather?q=${self.location}&APPID=${keys.OpenWeatherMap}&units=${self.units}`, true);
+      request.open('GET', `https://api.openweathermap.org/data/2.5/weather?q=${self.tileProps.location}&APPID=${keys.OpenWeatherMap}&units=${self.tileProps.units}`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
@@ -48,7 +48,7 @@ export default Vue.extend({
             self.addShine();
             self.tempterature = currentWeather;
           }
-          self.link = `https://openweathermap.org/find?q=${self.location}`;
+          self.link = `https://openweathermap.org/find?q=${self.tileProps.location}`;
         }
       };
       request.send();

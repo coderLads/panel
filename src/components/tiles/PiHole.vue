@@ -19,12 +19,13 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'VodeVoice',
-  props: {},
+  props: {
+    tileProps: Object,
+  },
   data() {
     return {
       link: '',
       ads: 0,
-      piIp: '172.30.15.90',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 10000,
@@ -34,7 +35,7 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', `http://${self.piIp}/admin/api.php?summary`, true);
+      request.open('GET', `http://${self.tileProps.piIp}/admin/api.php?summary`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
@@ -53,7 +54,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    this.link = `http://${this.piIp}/admin/index.php`;
+    this.link = `http://${this.tileProps.piIp}/admin/index.php`;
   },
   created() {
     this.updateTile();

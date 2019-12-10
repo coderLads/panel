@@ -39,6 +39,7 @@ export default Vue.extend({
 
         // fetch the user's tiles
         firebase.database().ref(`/users/${currentUser.uid}/tiles/`).orderByChild('index').once('value', (tileSnapshot) => {
+          this.tileObject = [];
           const tiles = tileSnapshot.val();
           const tileArray = Object.keys(tiles).map(key => [(key), tiles[key]]);
           tileArray.sort((a, b) => a[1].index - b[1].index);

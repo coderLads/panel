@@ -19,13 +19,13 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'VodeVoice',
-  props: {},
+  props: {
+    tileProps: Object,
+  },
   data() {
     return {
       link: '',
       hours: 0,
-      serverId: '617054974895063050',
-      user: 'Badtz#6434',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
@@ -35,17 +35,17 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', `https://proxy.statbot.net:5000/servervoice/${self.serverId}`, true);
+      request.open('GET', `https://proxy.statbot.net:5000/servervoice/${self.tileProps.serverId}`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          const newUserHours = r.topMembers.find((i:any) => i.membertag === self.user).count;
+          const newUserHours = r.topMembers.find((i:any) => i.membertag === self.tileProps.user).count;
           if (self.hours !== newUserHours) {
             self.addShine();
             self.hours = newUserHours;
           }
 
-          self.link = `https://statbot.net/dashboard/${self.serverId}/voice`;
+          self.link = `https://statbot.net/dashboard/${self.tileProps.serverId}/voice`;
         }
       };
       request.send();

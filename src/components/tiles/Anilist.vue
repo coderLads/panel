@@ -18,12 +18,13 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Anilist',
-  props: {},
+  props: {
+    tileProps: Object,
+  },
   data() {
     return {
       link: '',
       days: 0,
-      username: 'Badtz',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 600000,
@@ -33,7 +34,7 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const variables = {
-        username: this.username,
+        username: this.tileProps.username,
       };
 
       const url = 'https://graphql.anilist.co';
@@ -75,7 +76,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    this.link = `https://anilist.co/user/${this.username}`;
+    this.link = `https://anilist.co/user/${this.tileProps.username}`;
   },
   created() {
     this.updateTile();

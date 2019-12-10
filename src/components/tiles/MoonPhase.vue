@@ -19,7 +19,6 @@ export default Vue.extend({
       phase: '',
       daysUntil: '',
       type: '',
-      timeZone: 'America/Los_Angeles',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
