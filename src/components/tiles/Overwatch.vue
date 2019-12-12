@@ -28,7 +28,7 @@ export default Vue.extend({
       rank: '',
       highlight: false,
       intervalHolder: 0,
-      delayBetweenUpdates: 100000,
+      delayBetweenUpdates: 600000,
     };
   },
   methods: {
