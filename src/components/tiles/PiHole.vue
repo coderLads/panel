@@ -44,6 +44,8 @@ export default Vue.extend({
             self.addShine();
             self.ads = newAdsBlocked;
           }
+        } else {
+          console.log('could not connect to pihole');
         }
       };
       request.send();
