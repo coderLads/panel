@@ -4,7 +4,7 @@
     <div
       v-if="tile === undefined || tile === null"
       @click="addTile()"
-      class="text-6xl font-hairline text-white h-full rounded border-2 border-white opacity-0 cursor-pointer hover:opacity-100 hover:shadow-lg select-none"
+      class="tileSlot text-6xl font-hairline text-white h-full rounded border-2 border-white opacity-0 cursor-pointer hover:opacity-100 hover:shadow-lg select-none"
     >
       +
     </div>
@@ -19,10 +19,11 @@ export default Vue.extend({
   name: 'TileSlot',
   props: {
     tile: Array,
+    tileIndex: Number,
   },
   methods: {
     addTile() {
-
+      console.log(this.tileIndex);
     },
   },
   computed: {
@@ -37,7 +38,7 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-div {
+div.tileSlot {
   transition: opacity ease-in .25s;
 }
 </style>

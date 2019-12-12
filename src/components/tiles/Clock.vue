@@ -1,5 +1,8 @@
 <template>
-  <a class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col" :class="{ shiny: highlight }">
+  <a
+    target="_blank"
+    :href="`https://www.timeanddate.com/worldclock/?query=${tileProps.timeZone}`"
+    class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col" :class="{ shiny: highlight }">
     <p class="text-4xl text-teal-500 mt-4">{{time}}</p>
     <span class="text-base text-gray-500 mt-1">{{range}}</span>
     <div class="text-sm text-gray-700 mt-1">{{tileProps.timeZone.split('/')[1].replace("_"," ")}}</div>

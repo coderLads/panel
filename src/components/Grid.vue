@@ -1,7 +1,7 @@
 <template>
   <div class="h-full">
     <div class="flex" :class="justify" v-for="rkey in rows" :key="rkey">
-      <TileSlot v-for="ckey in columns" :key="ckey" :tile="tileObject[((rkey-1)*columns) + ckey-1]"/>
+      <TileSlot v-for="ckey in columns" :key="ckey" :tile="tileObject[((rkey-1)*columns) + ckey-1]" :tileIndex="((rkey-1)*columns) + ckey-1"/>
     </div>
   </div>
 </template>
