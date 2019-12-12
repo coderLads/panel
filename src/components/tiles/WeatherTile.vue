@@ -11,7 +11,7 @@
       <span class="text-xl pb-2">º</span>
     </div>
     <span class="text-base text-gray-500 mt-1 align-middle">{{tileProps.location}}</span>
-    <div class="text-sm text-gray-700 mt-1">Open Weather Map</div>
+    <div class="text-sm text-gray-700 mt-1">Weather</div>
   </a>
 </template>
 
