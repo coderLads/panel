@@ -23,7 +23,7 @@ export default Vue.extend({
   },
   methods: {
     addTile() {
-      console.log(this.tileIndex);
+      // console.log(this.tileIndex);
     },
   },
   computed: {
