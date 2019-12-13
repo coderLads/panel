@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{ backgroundImage: `url(${this.url})` }"
-    class="h-full flex flex-col p-4"
+    class="h-full flex flex-col"
   >
     <grid />
   </div>
