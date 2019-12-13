@@ -3,7 +3,7 @@
     <div v-if="showPicker === true" class="blur absolute z-10 h-full w-full" @click="quitModal($event)">
       <div
         v-if="showPicker === true"
-        class="z-20 container mx-auto bg-white rounded max-w-lg p-8 mt-8 opacity-100"
+        class="z-20 container mx-auto bg-white rounded max-w-lg p-8 mt-8 shadow-lg"
       >
         <h3 class="block text-gray-700 text-lg font-bold mb-4"> Pick a tile for slot {{currentTileIndex}}</h3>
       </div>
@@ -45,7 +45,9 @@ export default Vue.extend({
   },
   methods: {
     addTile(tileIndex: number) {
-      console.log(tileIndex);
+      firebase.database().ref('/tiles').once('value', (snapshot) => {
+        const tileList = snapshot.val();
+      });
       this.currentTileIndex = tileIndex;
       this.showPicker = true;
     },
