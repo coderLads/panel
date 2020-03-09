@@ -9,7 +9,7 @@
       <p class="text-4xl ">{{players}}</p>
       <p class="text-4xl ">/{{maxPlayers}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Online Players</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">Online</span>
     <div class="text-xs text-gray-700 mt-1">{{tileProps.serverIp}}</div>
   </a>
 </template>

@@ -5,9 +5,10 @@
     :class="{ shiny: highlight }"
   >
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
-      <p class="text-4xl">{{stats.todayDeaths}}</p>
+      <p class="text-4xl">{{stats.deaths}}</p>
+      <p class="text-xl pl-2 pt-2"><span class="text-2xl">+</span>{{stats.todayDeaths}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Deaths today</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">Deaths in {{stats.country}}</span>
     <div class="text-sm text-gray-700 mt-1">Corona Virus</div>
   </a>
 </template>
@@ -22,8 +23,11 @@ export default Vue.extend({
   },
   data() {
     return {
-      stats: [],
-      deaths: '',
+      stats: {
+        country: '...',
+        deaths: 0,
+        todayDeaths: 0,
+      },
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 600000,
@@ -42,7 +46,6 @@ export default Vue.extend({
             self.addShine();
             // eslint-disable-next-line prefer-destructuring
             self.stats = newStats[0];
-            self.deaths = '';
           }
         }
       };
