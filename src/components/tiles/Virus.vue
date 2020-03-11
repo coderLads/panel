@@ -5,7 +5,7 @@
     :class="{ shiny: highlight }"
   >
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
-      <p class="text-4xl">{{stats.deaths}}</p>
+      <p class="text-4xl">{{stats.deaths - stats.todayDeaths}}</p>
       <p class="text-xl pl-2 pt-2"><span class="text-2xl">+</span>{{stats.todayDeaths}}</p>
     </div>
     <span class="text-base text-gray-500 mt-1 align-middle">Deaths in {{stats.country}}</span>
