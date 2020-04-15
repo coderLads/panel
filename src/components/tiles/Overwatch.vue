@@ -8,7 +8,7 @@
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
       <p class="text-4xl">{{sr}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">{{rank}}</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">{{tileProps.role}}</span>
     <div class="text-sm text-gray-700 mt-1">Overwatch</div>
   </a>
 </template>
@@ -25,7 +25,6 @@ export default Vue.extend({
     return {
       link: '',
       sr: 0,
-      rank: '',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 600000,
@@ -40,11 +39,9 @@ export default Vue.extend({
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
           const newSr = r[self.tileProps.region].stats.competitive.overall_stats[`${self.tileProps.role}_comprank`];
-          const newRank = r[self.tileProps.region].stats.competitive.overall_stats[`${self.tileProps.role}_tier`];
           if (self.sr !== newSr) {
             self.addShine();
             self.sr = newSr;
-            self.rank = newRank[0].toUpperCase() + newRank.slice(1);
           }
         }
       };
