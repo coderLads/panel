@@ -1,0 +1,35 @@
+.ripple {
+    display: inline-block;
+    position: relative;
+    margin-top: -30px;
+    margin-left: 66px;
+    width: 10px;
+    height: 10px;
+  }
+  .ripple div {
+    position: absolute;
+    border: 2px solid #38b2ac;
+    opacity: 1;
+    border-radius: 50%;
+    animation: ripple 1.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .ripple div:nth-child(2) {
+    animation-delay: .5s;
+  }
+  @keyframes ripple {
+    0% {
+      top: 14px;
+      left: 14px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 28px;
+      height: 28px;
+      opacity: 0;
+    }
+  }
+  
