@@ -17,6 +17,8 @@
 <script lang="ts">
 import Vue from 'vue';
 
+const abbreviate = require('number-abbreviate');
+
 export default Vue.extend({
   name: 'VodeVoice',
   props: {
@@ -25,7 +27,7 @@ export default Vue.extend({
   data() {
     return {
       link: '',
-      ads: 0,
+      ads: '',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
@@ -41,9 +43,9 @@ export default Vue.extend({
           self.delayBetweenUpdates = 60000;
           const r = JSON.parse(request.response);
           const newAdsBlocked = r.ads_blocked_today;
-          if (self.ads !== newAdsBlocked) {
+          if (self.ads !== abbreviate(newAdsBlocked)) {
             self.addShine();
-            self.ads = newAdsBlocked;
+            self.ads = abbreviate(newAdsBlocked);
           }
         }
       };

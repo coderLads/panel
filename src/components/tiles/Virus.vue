@@ -1,20 +1,23 @@
 <template>
   <a
     target="_blank"
+    :href="'https://wuflu.live/' + tileProps.country"
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
     :class="{ shiny: highlight }"
   >
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
-      <p class="text-4xl">{{stats.deaths - stats.todayDeaths}}</p>
+      <p class="text-4xl">{{stats.deaths}}</p>
       <p class="text-xl pl-2 pt-2"><span class="text-2xl">+</span>{{stats.todayDeaths}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Deaths in {{stats.country}}</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">Deaths in {{tileProps.country}}</span>
     <div class="text-sm text-gray-700 mt-1">Corona Virus</div>
   </a>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
+const abbreviate = require('number-abbreviate');
 
 export default Vue.extend({
   name: 'Virus',
@@ -24,9 +27,8 @@ export default Vue.extend({
   data() {
     return {
       stats: {
-        country: '...',
-        deaths: 0,
-        todayDeaths: 0,
+        deaths: '',
+        todayDeaths: '',
       },
       highlight: false,
       intervalHolder: 0,
@@ -37,15 +39,15 @@ export default Vue.extend({
     updateTile() {
       const self = this;
       const request = new XMLHttpRequest();
-      request.open('GET', 'https://cors-anywhere.herokuapp.com/https://corona.lmao.ninja/countries', true);
+      request.open('GET', `https://cors-anywhere.herokuapp.com/https://disease.sh/v2/countries/${self.tileProps.country}`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          const newStats = r.filter((item:any) => item.country === self.tileProps.country);
-          if (self.stats !== newStats[0]) {
+          if (self.stats.deaths !== r.deaths) {
             self.addShine();
             // eslint-disable-next-line prefer-destructuring
-            self.stats = newStats[0];
+            self.stats.deaths = abbreviate(r.deaths - r.todayDeaths);
+            self.stats.todayDeaths = abbreviate(r.todayDeaths);
           }
         }
       };

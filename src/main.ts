@@ -10,7 +10,6 @@ import config from './firebaseConfig';
 import './registerServiceWorker';
 import router from './router';
 
-
 firebase.initializeApp(config);
 
 Vue.config.productionTip = false;
