@@ -28,7 +28,7 @@ export default Vue.extend({
       ads: 0,
       highlight: false,
       intervalHolder: 0,
-      delayBetweenUpdates: 10000,
+      delayBetweenUpdates: 60000,
     };
   },
   methods: {
@@ -38,15 +38,18 @@ export default Vue.extend({
       request.open('GET', `http://${self.tileProps.piIp}/admin/api.php?summary`, true);
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
+          self.delayBetweenUpdates = 60000;
           const r = JSON.parse(request.response);
           const newAdsBlocked = r.ads_blocked_today;
           if (self.ads !== newAdsBlocked) {
             self.addShine();
             self.ads = newAdsBlocked;
           }
-        } else {
-          console.log('could not connect to pihole');
         }
+      };
+      request.onerror = () => {
+        console.log('Could not connect to piehole');
+        self.delayBetweenUpdates = 600000;
       };
       request.send();
     },

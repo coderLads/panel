@@ -39,12 +39,16 @@ export default Vue.extend({
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          const newUserHours = r.topMembers.find((i:any) => i.membertag === self.tileProps.user).count;
-          if (self.hours !== newUserHours) {
-            self.addShine();
-            self.hours = newUserHours;
+          if (r.topMembers.length > 0) {
+            const newUserHours = r.topMembers.find((i:any) => i.membertag === self.tileProps.user).count;
+            if (self.hours !== newUserHours) {
+              self.addShine();
+              self.hours = newUserHours;
+            }
+          } else {
+            console.log('No voice data this week');
+            self.delayBetweenUpdates = 600000;
           }
-
           self.link = `https://statbot.net/dashboard/${self.tileProps.serverId}/voice`;
         }
       };
