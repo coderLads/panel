@@ -27,7 +27,7 @@ export default Vue.extend({
   data() {
     return {
       link: '',
-      ads: '',
+      ads: '0',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
