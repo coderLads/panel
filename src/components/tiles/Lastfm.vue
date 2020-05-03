@@ -11,7 +11,7 @@
     <span class="text-base text-gray-500 align-middle mt-1">{{trackInfo.artist}}</span>
     <div class="">
       <div class="text-sm text-gray-700 mb-1">Last.fm</div>
-      <div v-if='trackInfo.nowPlaying' class="ripple absolute"><div></div><div></div></div>
+      <div v-if='trackInfo.nowPlaying === true' class="ripple absolute"><div></div><div></div></div>
     </div>
   </a>
 </template>
@@ -36,7 +36,7 @@ export default Vue.extend({
       },
       highlight: false,
       intervalHolder: 0,
-      delayBetweenUpdates: 60000,
+      delayBetweenUpdates: 30000,
     };
   },
   methods: {
@@ -57,7 +57,7 @@ export default Vue.extend({
             self.trackInfo.link = currentTrack.url;
           }
           if (currentTrack['@attr']) {
-            self.trackInfo.nowPlaying = currentTrack['@attr'].nowplaying;
+            self.trackInfo.nowPlaying = true;
           } else {
             self.trackInfo.nowPlaying = false;
           }
