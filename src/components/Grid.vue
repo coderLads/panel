@@ -131,8 +131,19 @@ export default Vue.extend({
         }
       });
       if (this.formError.length === 0) {
-        console.log('no errors found, add to db');
+        this.insertTile();
         this.showConfirm = false;
+      }
+    },
+    insertTile() {
+      console.log(this.formData);
+      const { currentUser } = firebase.auth();
+      if (currentUser) {
+        firebase.database().ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/`).set({ index: this.currentTileIndex });
+        if (this.formData) {
+          firebase.database().ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/props`).set(this.formData);
+        }
+        this.updateGrid();
       }
     },
     quitModal(event: any) {
@@ -145,51 +156,54 @@ export default Vue.extend({
         this.showConfirm = false;
       }
     },
+    updateGrid() {
+      const self = this;
+      const { currentUser } = firebase.auth();
+      if (currentUser) {
+      // fetch the user's settings
+        firebase
+          .database()
+          .ref(`/users/${currentUser.uid}`)
+          .once('value', (settingsSnapshot) => {
+            const result = settingsSnapshot.val();
+            this.rows = result.rows;
+            this.columns = result.columns;
+
+            // fetch the user's tiles
+            firebase
+              .database()
+              .ref(`/users/${currentUser.uid}/tiles/`)
+              .orderByChild('index')
+              .once('value', (tileSnapshot) => {
+                this.tileObject = [];
+                const tiles = tileSnapshot.val();
+                const tileArray = Object.keys(tiles).map(key => [
+                  key,
+                  tiles[key],
+                ]);
+                tileArray.sort((a, b) => a[1].index - b[1].index);
+
+                // construct the tile object used by vue
+                let j = 0;
+                for (let i = 0; i < this.rows * this.columns; i += 1) {
+                  if (tileArray[j][1].index === i) {
+                    this.tileObject.push(tileArray[j]);
+                    if (j + 2 > tileArray.length) {
+                      break;
+                    }
+                    j += 1;
+                  } else {
+                    this.tileObject.push(null);
+                  }
+                }
+              });
+          });
+      }
+    },
   },
   async mounted() {
     this.templates = await tileTemplates;
-    const self = this;
-    const { currentUser } = firebase.auth();
-    if (currentUser) {
-      // fetch the user's settings
-      firebase
-        .database()
-        .ref(`/users/${currentUser.uid}`)
-        .once('value', (settingsSnapshot) => {
-          const result = settingsSnapshot.val();
-          this.rows = result.rows;
-          this.columns = result.columns;
-
-          // fetch the user's tiles
-          firebase
-            .database()
-            .ref(`/users/${currentUser.uid}/tiles/`)
-            .orderByChild('index')
-            .once('value', (tileSnapshot) => {
-              this.tileObject = [];
-              const tiles = tileSnapshot.val();
-              const tileArray = Object.keys(tiles).map(key => [
-                key,
-                tiles[key],
-              ]);
-              tileArray.sort((a, b) => a[1].index - b[1].index);
-
-              // construct the tile object used by vue
-              let j = 0;
-              for (let i = 0; i < this.rows * this.columns; i += 1) {
-                if (tileArray[j][1].index === i) {
-                  this.tileObject.push(tileArray[j]);
-                  if (j + 2 > tileArray.length) {
-                    break;
-                  }
-                  j += 1;
-                } else {
-                  this.tileObject.push(null);
-                }
-              }
-            });
-        });
-    }
+    this.updateGrid();
   },
 });
 </script>
