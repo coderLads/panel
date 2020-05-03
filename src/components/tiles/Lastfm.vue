@@ -58,6 +58,8 @@ export default Vue.extend({
           }
           if (currentTrack['@attr']) {
             self.trackInfo.nowPlaying = currentTrack['@attr'].nowplaying;
+          } else {
+            self.trackInfo.nowPlaying = false;
           }
         }
       };
