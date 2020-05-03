@@ -1,16 +1,13 @@
 module.exports = {
   prefix: '',
   important: false,
-  purge: {
-    mode: 'all',
-    content: [
-      './src/**/*.js',
-      './node_modules/next/dist/pages/**/*.js',
-      './node_modules/next/dist/pages/**/*.ts',
-      './node_modules/next/dist/pages/**/*.ts',
-      './node_modules/pikaday/pikaday.js',
-    ],
-  },
+  purge: [
+    './src/**/*.html',
+    './src/**/*.vue',
+    './src/**/*.ts',
+    './src/components/*.vue',
+    './src/components/tiles/*.vue',
+  ],
   separator: ':',
   theme: {
     screens: {
