@@ -1,0 +1,111 @@
+{
+    "tiles": {
+        "Anilist": {
+            "info": "Shows number of days watched on anilist.co",
+            "username": {
+                "description": "Your anilist username",
+                "example": "Badtz"
+            }
+        },
+        "Anki": {
+            "info": "Shows number of cards reviewed today on Anki"
+        },
+        "Clock": {
+            "info": "Shows the time in a given timezone",
+            "timeZone": {
+                "description": "The timezone for the clock",
+                "example": "Asia/Tokyo"
+            }
+        },
+        "Crypto": {
+            "info": "Shows the current price of a cryptocurrency in the specified currency",
+            "coin": {
+                "description": "The coin name",
+                "example": "btc"
+            },
+            "currency": {
+                "description": "The currency you want the price displayed in",
+                "example": "usd"
+            }
+        },
+        "Lastfm": {
+            "info": "Shows what you are currently listening to on last.fm",
+            "user": {
+                "description": "Your Last.fm username",
+                "example": "MiloCodes"
+            }
+        },
+        "Minecraft": {
+            "info": "Shows number of online players on a given minecraft server",
+            "serverIp": {
+                "description": "The minecraft server ip",
+                "example": "mc.badtz.dev"
+            }
+        },
+        "MoonPhase": {
+            "info": "Shows the current phase of the moon"
+        },
+        "Overwatch": {
+            "info": "Shows your overwatch SR on a specific role",
+            "region": {
+                "description": "Your play region",
+                "example": "us"
+            },
+            "role": {
+                "description": "The role you want to display",
+                "example": "support"
+            },
+            "username": {
+                "description": "Your battletag",
+                "example": "Badtz-1552"
+            }
+        },
+        "PiHole": {
+            "info": "Shows number of ads blocked by PiHole",
+            "piIp": {
+                "description": "Local Ip of PiHole",
+                "example": "localhost"
+            }
+        },
+        "SinceReply": {
+            "info": "Shows the number of days since a person replied to you",
+            "timestamp": {
+                "description": "Timestamp of last reply",
+                "example": "10/15/19 12:30:20"
+            },
+            "name": {
+                "description": "Name of person that has not replied",
+                "example": "A swine"
+            }
+        },
+        "Virus": {
+            "info": "Shows the number of deaths due to covid-19 in a given country",
+            "country": {
+                "description": "Country to track deaths for",
+                "example": "USA"
+            }
+        },
+        "VodeVoice": {
+            "info": "Shows number of minutes a user has spent in voice on a discord server. Statbot.net for more info",
+            "serverId": {
+                "description": "The id of the server on statbot.net",
+                "example": "617054974895063050"
+            },
+            "user": {
+                "description": "Your discord username",
+                "example": "Badtz#6434"
+            }
+        },
+        "WeatherTile": {
+            "info": "Shows the weather in a given city",
+            "location": {
+                "description": "City to get weather for",
+                "example": "Seattle"
+            },
+            "units": {
+                "description": "Unit type",
+                "example": "imperial"
+            }
+        }
+    }
+}
