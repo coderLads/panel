@@ -55,9 +55,9 @@ export default Vue.extend({
             self.trackInfo.name = currentTrack.name;
             self.trackInfo.artist = currentTrack.artist['#text'];
             self.trackInfo.link = currentTrack.url;
-            if (currentTrack['@attr']) {
-              self.trackInfo.nowPlaying = currentTrack['@attr'].nowplaying;
-            }
+          }
+          if (currentTrack['@attr']) {
+            self.trackInfo.nowPlaying = currentTrack['@attr'].nowplaying;
           }
         }
       };

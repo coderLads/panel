@@ -1,6 +1,16 @@
 module.exports = {
   prefix: '',
   important: false,
+  purge: {
+    mode: 'all',
+    content: [
+      './src/**/*.js',
+      './node_modules/next/dist/pages/**/*.js',
+      './node_modules/next/dist/pages/**/*.ts',
+      './node_modules/next/dist/pages/**/*.ts',
+      './node_modules/pikaday/pikaday.js',
+    ],
+  },
   separator: ':',
   theme: {
     screens: {
