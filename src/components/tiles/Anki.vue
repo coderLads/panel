@@ -3,6 +3,7 @@
     target="_blank"
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
     :class="{ shiny: highlight }"
+    href="https://ankiweb.net/decks/"
   >
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
       <p class="text-4xl">{{todayReviews}}</p>
