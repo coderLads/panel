@@ -38,8 +38,10 @@ export default Vue.extend({
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          const newSr = r[self.tileProps.region].stats.competitive.overall_stats[`${self.tileProps.role}_comprank`];
-          if (self.sr !== newSr) {
+          let newSr = r[self.tileProps.region].stats.competitive.overall_stats[`${self.tileProps.role}_comprank`];
+          if (newSr === null) {
+            newSr = 0;
+          } else if (self.sr !== newSr) {
             self.addShine();
             self.sr = newSr;
           }
