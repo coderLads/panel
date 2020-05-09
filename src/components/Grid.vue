@@ -94,6 +94,7 @@ export default Vue.extend({
       templates: {} as any,
       justify: 'justify-center',
       tileObject: [] as any,
+      activeTiles: [] as any,
       rows: 0,
       columns: 0,
       showPicker: false,
@@ -139,9 +140,15 @@ export default Vue.extend({
       console.log(this.formData);
       const { currentUser } = firebase.auth();
       if (currentUser) {
-        firebase.database().ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/`).set({ index: this.currentTileIndex });
+        firebase
+          .database()
+          .ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/`)
+          .set({ index: this.currentTileIndex });
         if (this.formData) {
-          firebase.database().ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/props`).set(this.formData);
+          firebase
+            .database()
+            .ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/props`)
+            .set(this.formData);
         }
         this.updateGrid();
       }
@@ -157,10 +164,11 @@ export default Vue.extend({
       }
     },
     updateGrid() {
+      const inTemplates = tileTemplates;
       const self = this;
       const { currentUser } = firebase.auth();
       if (currentUser) {
-      // fetch the user's settings
+        // fetch the user's settings
         firebase
           .database()
           .ref(`/users/${currentUser.uid}`)
@@ -177,6 +185,16 @@ export default Vue.extend({
               .once('value', (tileSnapshot) => {
                 this.tileObject = [];
                 const tiles = tileSnapshot.val();
+
+                // create filtered list of tiles the user can add
+                self.activeTiles = Object.keys(tiles);
+                const filteredTemplates = Object.fromEntries(
+                  Object.entries(inTemplates).filter(
+                    ([key, val]) => !this.activeTiles.includes(key),
+                  ),
+                );
+                this.templates = filteredTemplates;
+
                 const tileArray = Object.keys(tiles).map(key => [
                   key,
                   tiles[key],
@@ -201,8 +219,7 @@ export default Vue.extend({
       }
     },
   },
-  async mounted() {
-    this.templates = await tileTemplates;
+  mounted() {
     this.updateGrid();
   },
 });
