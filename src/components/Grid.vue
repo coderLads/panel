@@ -137,7 +137,6 @@ export default Vue.extend({
       }
     },
     insertTile() {
-      console.log(this.formData);
       const { currentUser } = firebase.auth();
       if (currentUser) {
         firebase
