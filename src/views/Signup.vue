@@ -59,6 +59,8 @@ export default Vue.extend({
         if (user.user) {
           firebase.database().ref(`users/${user.user.uid}`).set({
             email: this.email,
+            rows: 3,
+            columns: 3,
           });
         }
         this.$router.replace('home');
