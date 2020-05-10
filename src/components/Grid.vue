@@ -186,32 +186,36 @@ export default Vue.extend({
                 const tiles = tileSnapshot.val();
 
                 // create filtered list of tiles the user can add
-                self.activeTiles = Object.keys(tiles);
-                const filteredTemplates = Object.fromEntries(
-                  Object.entries(inTemplates).filter(
-                    ([key, val]) => !this.activeTiles.includes(key),
-                  ),
-                );
-                this.templates = filteredTemplates;
+                if (tiles) {
+                  self.activeTiles = Object.keys(tiles);
+                  const filteredTemplates = Object.fromEntries(
+                    Object.entries(inTemplates).filter(
+                      ([key, val]) => !this.activeTiles.includes(key),
+                    ),
+                  );
+                  this.templates = filteredTemplates;
 
-                const tileArray = Object.keys(tiles).map(key => [
-                  key,
-                  tiles[key],
-                ]);
-                tileArray.sort((a, b) => a[1].index - b[1].index);
+                  const tileArray = Object.keys(tiles).map(key => [
+                    key,
+                    tiles[key],
+                  ]);
+                  tileArray.sort((a, b) => a[1].index - b[1].index);
 
-                // construct the tile object used by vue
-                let j = 0;
-                for (let i = 0; i < this.rows * this.columns; i += 1) {
-                  if (tileArray[j][1].index === i) {
-                    this.tileObject.push(tileArray[j]);
-                    if (j + 2 > tileArray.length) {
-                      break;
+                  // construct the tile object used by vue
+                  let j = 0;
+                  for (let i = 0; i < this.rows * this.columns; i += 1) {
+                    if (tileArray[j][1].index === i) {
+                      this.tileObject.push(tileArray[j]);
+                      if (j + 2 > tileArray.length) {
+                        break;
+                      }
+                      j += 1;
+                    } else {
+                      this.tileObject.push(null);
                     }
-                    j += 1;
-                  } else {
-                    this.tileObject.push(null);
                   }
+                } else {
+                  this.templates = inTemplates;
                 }
               });
           });
