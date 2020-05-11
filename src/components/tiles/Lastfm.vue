@@ -5,8 +5,8 @@
     class="w-full h-full bg-white text-center m-0 rounded shadow-md flex flex-col"
     :class="{ shiny: highlight }"
   >
-    <div class="text-teal-500 h-24 mt-4 flex flex-col justify-center">
-      <div class="text-lg">{{trackInfo.name}}</div>
+    <div class="text-teal-500 h-16 mt-4 flex flex-col justify-center">
+      <div class="text-lg px-2 max-h-full overflow-hidden">{{trackInfo.name}}</div>
     </div>
     <span class="text-base text-gray-500 align-middle mt-1">{{trackInfo.artist}}</span>
     <div class="">
