@@ -44,6 +44,7 @@ const router = new Router({
   ],
 });
 
+// checks that a user is logged in before allowing them to go to certain pages
 router.beforeEach((to, from, next) => {
   const { currentUser } = firebase.auth();
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);

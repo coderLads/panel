@@ -20,6 +20,7 @@ export default Vue.extend({
     tile: Array,
   },
   computed: {
+    // this is a fancy thing that loads the correct vue files for the slots based on the db data passed in
     componentFile() {
       return () => (this.tile ? import(`./tiles/${this.tile[0]}.vue`) : null);
     },

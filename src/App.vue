@@ -36,6 +36,7 @@ export default Vue.extend({
     },
   },
   mounted() {
+    // keep the user data stored in vue
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.user = user;

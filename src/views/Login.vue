@@ -57,6 +57,7 @@ export default Vue.extend({
     };
   },
   methods: {
+    // logs a user in
     login() {
       firebase
         .auth()

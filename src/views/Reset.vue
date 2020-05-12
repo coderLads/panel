@@ -35,6 +35,7 @@ export default Vue.extend({
     };
   },
   methods: {
+    // resets a user's password
     resetPassword() {
       firebase.auth().sendPasswordResetEmail(this.email).then(() => {
         // eslint-disable-next-line no-alert

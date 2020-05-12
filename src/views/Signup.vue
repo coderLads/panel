@@ -54,11 +54,13 @@ export default Vue.extend({
     };
   },
   methods: {
+    // signs a user up
     signUp() {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) => {
         if (user.user) {
           firebase.database().ref(`users/${user.user.uid}`).set({
             email: this.email,
+            // current defaults for rows and columns
             rows: 3,
             columns: 3,
           });

@@ -3,7 +3,7 @@
     <div
       v-if="showPicker === true"
       class="blur absolute z-10 h-full w-full"
-      @click="quitModal($event)"
+      @click="quitPicker($event)"
     >
       <div
         v-if="showPicker === true"
@@ -68,7 +68,7 @@
         v-for="ckey in columns"
         :key="ckey"
         :tile="tileObject[((rkey-1)*columns) + ckey-1]"
-        @addTile="addTile(((rkey-1)*columns) + ckey-1)"
+        @addTile="pickTile(((rkey-1)*columns) + ckey-1)"
       />
     </div>
   </div>
@@ -106,62 +106,76 @@ export default Vue.extend({
     };
   },
   methods: {
-    addTile(tileIndex: number) {
-      firebase
-        .database()
-        .ref('/tiles')
-        .once('value', (snapshot) => {
-          const tileList = snapshot.val();
-        });
+    // shows the inital modal for picking a tile
+    pickTile(tileIndex: number) {
       this.currentTileIndex = tileIndex;
       this.showPicker = true;
     },
+    // shows the modal for filling out tile info
     confirmTile(tileName: any) {
       this.showPicker = false;
       this.showConfirm = true;
       this.addTileName = tileName;
     },
+    // checks to make sure all the required fields for the current tile are filled
     validateForm() {
+      // get a list of the fields that this tile is supposed to have and remove the info field
       let fieldList = Object.keys(this.templates[this.addTileName]);
       fieldList = fieldList.filter(field => field !== 'info');
+
+      // get a list of the fields currently in the form
       const currentFields = Object.keys(this.formData);
       this.formError = [];
+
+      // for each field that should be filled:
       fieldList.forEach((field) => {
+        // if it's not filled, add the name of the field to the list of errors to display
         if (!currentFields.includes(field)) {
           this.formError.push(`missing ${field}`);
         }
       });
+
+      // if there are no errors, insert the tile into the db
       if (this.formError.length === 0) {
         this.insertTile();
         this.showConfirm = false;
       }
     },
+    // inserts new, validated tiles into the db
     insertTile() {
       const { currentUser } = firebase.auth();
       if (currentUser) {
+        // insert tile name and index
         firebase
           .database()
           .ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/`)
           .set({ index: this.currentTileIndex });
+
+        // if the tile has props (not all do) insert those under the tile
         if (this.formData) {
           firebase
             .database()
             .ref(`/users/${currentUser.uid}/tiles/${this.addTileName}/props`)
             .set(this.formData);
         }
+
+        // refresh the grid
         this.updateGrid();
       }
     },
-    quitModal(event: any) {
+    // closes out of the initial picker modal
+    quitPicker(event: any) {
       if (event.target.parentElement === this.$el) {
         this.showPicker = false;
       }
     },
+    // closes out of the confirmation modal
     quitConfirm(event: any) {
       if (event.target.parentElement === this.$el) {
         this.showConfirm = false;
       }
     },
+    // fetches and displays tiles from the db
     updateGrid() {
       const inTemplates = tileTemplates;
       const self = this;
@@ -185,8 +199,9 @@ export default Vue.extend({
                 this.tileObject = [];
                 const tiles = tileSnapshot.val();
 
-                // create filtered list of tiles the user can add
+                // if the user already has tiles
                 if (tiles) {
+                  // create filtered list of tiles the user can add (no dupes allowed at this time)
                   self.activeTiles = Object.keys(tiles);
                   const filteredTemplates = Object.fromEntries(
                     Object.entries(inTemplates).filter(
@@ -195,13 +210,13 @@ export default Vue.extend({
                   );
                   this.templates = filteredTemplates;
 
+                  // construct the tile object used by vue
                   const tileArray = Object.keys(tiles).map(key => [
                     key,
                     tiles[key],
                   ]);
                   tileArray.sort((a, b) => a[1].index - b[1].index);
 
-                  // construct the tile object used by vue
                   let j = 0;
                   for (let i = 0; i < this.rows * this.columns; i += 1) {
                     if (tileArray[j][1].index === i) {
@@ -222,7 +237,9 @@ export default Vue.extend({
       }
     },
   },
+  // called when this component is mounted to the page
   mounted() {
+    // update the grid
     this.updateGrid();
   },
 });

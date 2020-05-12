@@ -18,6 +18,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      // this is for the background image
       url: `https://source.unsplash.com/collection/1053828/${window.innerWidth}x${window.innerHeight}`,
     };
   },
