@@ -10,7 +10,7 @@
     "launch": "yarn build && firebase deploy"
   },
   "dependencies": {
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.8.0",
     "core-js": "^3.5.0",
     "firebase": "^7.14.2",
     "number-abbreviate": "^2.0.0",
