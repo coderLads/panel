@@ -10,6 +10,9 @@
         "Anki": {
             "info": "Shows number of cards reviewed today on Anki"
         },
+        "Chat": {
+            "info": "Shows number of users online in proyecto.club"
+        },
         "Clock": {
             "info": "Shows the time in a given timezone",
             "timeZone": {
