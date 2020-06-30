@@ -31,6 +31,9 @@
                 "example": "usd"
             }
         },
+        "DGG": {
+            "info": "Shows DGG status"
+        },
         "Lastfm": {
             "info": "Shows what you are currently listening to on last.fm",
             "user": {
