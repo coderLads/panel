@@ -47,6 +47,7 @@ export default Vue.extend({
             self.host = r.host.display_name;
           } else {
             self.viewers = r.viewers;
+            self.live = currentStatus;
           }
           if (self.live !== currentStatus) {
             self.addShine();
