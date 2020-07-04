@@ -9,7 +9,7 @@
       <p class="text-3xl">{{live ? 'Online' : 'Offline'}}</p>
     </div>
     <span class="text-base text-gray-500 mt-4 align-middle">
-      <div v-if="live === true">{{viewers}} viewers</div>
+      <div v-if="live === true">{{shortViewers}} viewers</div>
       <div v-else>Hosting {{host}}</div>
     </span>
     <div class="text-sm text-gray-700 mt-1">D.GG</div>
@@ -18,6 +18,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
+const abbreviate = require('number-abbreviate');
 
 export default Vue.extend({
   name: 'DGG',
@@ -28,6 +30,7 @@ export default Vue.extend({
     return {
       live: false,
       viewers: 0,
+      shortViewers: '',
       host: '',
       highlight: false,
       intervalHolder: 0,
@@ -47,6 +50,7 @@ export default Vue.extend({
             self.host = r.host.display_name;
           } else {
             self.viewers = r.viewers;
+            self.shortViewers = abbreviate(r.viewers);
             self.live = currentStatus;
           }
           if (self.live !== currentStatus) {
