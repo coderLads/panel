@@ -8,7 +8,7 @@
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
       <p class="text-4xl">{{todayReviews}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Reviews Today</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">{{status}}</span>
     <div class="text-sm text-gray-700 mt-1">Anki</div>
   </a>
 </template>
@@ -27,12 +27,14 @@ export default Vue.extend({
     return {
       todayReviews: '0',
       highlight: false,
+      status: 'Reviews Today',
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
     };
   },
   methods: {
     invokeAnki(action:any, version:any, params:any = {}) {
+      const self = this;
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('load', () => {
@@ -49,6 +51,12 @@ export default Vue.extend({
 
         xhr.open('POST', 'http://127.0.0.1:8765');
         xhr.send(JSON.stringify({ action, version, params }));
+        xhr.onerror = () => {
+          console.log('Could not connect to anki');
+          self.delayBetweenUpdates = 600000;
+          self.addShine();
+          self.status = 'Offline';
+        };
       });
     },
     async updateTile() {

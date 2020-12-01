@@ -9,7 +9,7 @@
     <div class="text-teal-500 mt-4 flex flex-row justify-center">
       <p class="text-4xl">{{ads}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Blocked</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">{{status}}</span>
     <div class="text-sm text-gray-700 mt-1">PiHole</div>
   </a>
 </template>
@@ -28,6 +28,7 @@ export default Vue.extend({
     return {
       link: '',
       ads: '0',
+      status: '',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
@@ -52,7 +53,10 @@ export default Vue.extend({
       request.onerror = () => {
         console.log('Could not connect to piehole');
         self.delayBetweenUpdates = 600000;
+        self.addShine();
+        self.status = 'Offline';
       };
+
       request.send();
     },
     addShine() {
