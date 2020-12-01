@@ -68,7 +68,7 @@
         v-for="ckey in columns"
         :key="ckey"
         :tile="tileObject[((rkey-1)*columns) + ckey-1]"
-        @addTile="pickTile(((rkey-1)*columns) + ckey-1)"
+        @add-tile="pickTile(((rkey-1)*columns) + ckey-1)"
       />
     </div>
   </div>
