@@ -73,6 +73,13 @@
                 "example": "localhost"
             }
         },
+        "SadPepe": {
+            "info": "Shows online time and status on dgg",
+            "user": {
+                "description": "Your dgg username",
+                "example": "Badtz"
+            }
+        },
         "SinceReply": {
             "info": "Shows the number of days since a person replied to you",
             "timestamp": {
