@@ -9,7 +9,7 @@
       <p class="text-4xl ">{{players}}</p>
       <p class="text-4xl ">/{{maxPlayers}}</p>
     </div>
-    <span class="text-base text-gray-500 mt-1 align-middle">Online</span>
+    <span class="text-base text-gray-500 mt-1 align-middle">{{status}}</span>
     <div class="text-xs text-gray-700 mt-1">{{tileProps.serverIp}}</div>
   </a>
 </template>
@@ -28,6 +28,7 @@ export default Vue.extend({
       link: '',
       players: 0,
       maxPlayers: 0,
+      status: '',
       highlight: false,
       intervalHolder: 0,
       delayBetweenUpdates: 60000,
@@ -41,11 +42,17 @@ export default Vue.extend({
       request.onload = () => {
         if (request.status >= 200 && request.status < 400) {
           const r = JSON.parse(request.response);
-          const currentPlayers = r.players.online;
-          if (self.players !== currentPlayers || self.maxPlayers !== r.players.max) {
+          if (r.players) {
+            self.status = 'Online';
+            const currentPlayers = r.players.online;
+            if (self.players !== currentPlayers || self.maxPlayers !== r.players.max) {
+              self.addShine();
+              self.players = currentPlayers;
+              self.maxPlayers = r.players.max;
+            }
+          } else {
             self.addShine();
-            self.players = currentPlayers;
-            self.maxPlayers = r.players.max;
+            self.status = 'Offline';
           }
         }
       };
