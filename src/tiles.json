@@ -91,7 +91,7 @@
                 "example": "USA"
             }
         },
-        "VodeVoice": {
+        "DiscordVoice": {
             "info": "Shows number of minutes a user has spent in voice on a discord server. Statbot.net for more info",
             "serverId": {
                 "description": "The id of the server on statbot.net",
@@ -102,7 +102,7 @@
                 "example": "Badtz#6434"
             }
         },
-        "WeatherTile": {
+        "Weather": {
             "info": "Shows the weather in a given city",
             "location": {
                 "description": "City to get weather for",

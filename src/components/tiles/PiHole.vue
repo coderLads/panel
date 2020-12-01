@@ -20,7 +20,7 @@ import Vue from 'vue';
 const abbreviate = require('number-abbreviate');
 
 export default Vue.extend({
-  name: 'VodeVoice',
+  name: 'PiHole',
   props: {
     tileProps: Object,
   },

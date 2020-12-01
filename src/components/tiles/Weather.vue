@@ -20,7 +20,7 @@ import Vue from 'vue';
 import keys from '@/keys';
 
 export default Vue.extend({
-  name: 'WeatherTile',
+  name: 'Weather',
   props: {
     tileProps: Object,
   },

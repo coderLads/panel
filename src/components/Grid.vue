@@ -159,6 +159,9 @@ export default Vue.extend({
             .set(this.formData);
         }
 
+        // empty the form
+        this.formData = {};
+
         // refresh the grid
         this.updateGrid();
       }

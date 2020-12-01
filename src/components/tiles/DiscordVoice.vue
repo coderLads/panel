@@ -18,7 +18,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'VodeVoice',
+  name: 'DiscordVoice',
   props: {
     tileProps: Object,
   },
